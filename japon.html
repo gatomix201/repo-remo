@@ -34,47 +34,112 @@
         }
 
         /* El resto de estilos se añadirán en los siguientes commits */
+        /* ------------------------------------- */
+        /* Commit 3: Estilizar Header y Navegación */
+        /* ------------------------------------- */
+        header {
+            background-color: var(--color-principal);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: white;
+            margin-top: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent; /* Para el efecto hover */
+            transition: border-bottom 0.3s;
+        }
+
+        nav a:hover {
+            border-bottom: 2px solid var(--color-acento);
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--color-acento);
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: var(--color-acento);
+            color: var(--color-secundario);
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Japón: Una Aventura Culinaria</h1>
+        <h1>Japón: Una Aventura Culinaria y Cultural</h1>
         <nav>
             <ul>
-                <li><a href="#sushi">Sushi</a></li>
-                <li><a href="#ramen">Ramen</a></li>
-                <li><a href="#tempura">Tempura</a></li>
+                <li><a href="#geografia">Geografía</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#cultura">Cultura</a></li>
+                <li><a href="#gastronomia">Gastronomía</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="introduccion">
-            <h2>Introducción a la Gastronomía Japonesa</h2>
-            <p>La cocina japonesa, o **Washoku**, es famosa por su énfasis en los ingredientes frescos, la presentación artística y el equilibrio de sabores. Fue reconocida como Patrimonio Cultural Inmaterial de la UNESCO.</p>
-            <p>Se enfoca en cinco principios básicos: cinco colores (blanco, negro, rojo, amarillo y verde), cinco técnicas (asar, cocer a fuego lento, freír, vaporizar y crudo) y cinco sabores (dulce, salado, agrio, amargo y umami).</p>
+            <h2>🇯🇵 Introducción a Japón</h2>
+            <p>Japón, o **Nihon/Nippon**, es una nación insular reconocida globalmente por su singular mezcla de tradición milenaria y tecnología futurista. El país es un archipiélago que se extiende por el Océano Pacífico, ofreciendo paisajes que van desde montañas nevadas hasta playas tropicales.</p>
         </section>
 
-        <section id="sushi">
-            <h2>🍣 Sushi y Sashimi</h2>
-            <p>El **Sushi** es quizás el plato más icónico. Consiste en arroz avinagrado (shari) combinado con diversos ingredientes, principalmente pescado y mariscos crudos o cocinados. El **Sashimi** se refiere únicamente a cortes finos de pescado o mariscos sin arroz.</p>
+        <section id="geografia">
+            <h2>🗺️ Geografía y Entorno Natural</h2>
+            <p>Japón está formado por un arco de más de 6,800 islas. Las cuatro islas principales son **Honshu** (la más grande), **Hokkaido**, **Kyushu** y **Shikoku**. Es un país altamente montañoso y volcánico, siendo el **Monte Fuji** su pico más alto.</p>
+            <p>Su ubicación influye directamente en su gastronomía, con una vasta costa que proporciona mariscos frescos y variados climas que permiten diversos cultivos.</p>
             <ul>
-                <li>Variedades Populares: Nigiri, Maki, Uramaki.</li>
-                <li>Acompañamientos Comunes: Salsa de soya, wasabi y jengibre encurtido (gari).</li>
+                <li>Capital: Tokio</li>
+                <li>Población: Aproximadamente 126 millones.</li>
             </ul>
         </section>
 
-        <section id="ramen">
-            <h2>🍜 Ramen: El Confort en un Tazón</h2>
-            <p>El **Ramen** es un plato de fideos de trigo servidos en un caldo sabroso, a menudo con carne (cerdo o pollo) y una variedad de ingredientes. Aunque es de origen chino, Japón lo ha adaptado y perfeccionado con innumerables estilos regionales.</p>
-            <p>Los tipos de caldo más famosos son **Shio** (sal), **Shoyu** (salsa de soya), **Miso** y **Tonkotsu** (hueso de cerdo).</p>
+        <section id="historia">
+            <h2>📜 Breve Contexto Histórico</h2>
+            <p>La historia japonesa está marcada por periodos de aislamiento (**Sakoku**) y rápida modernización. La época feudal de los **Shogunatos** y los samuráis dio paso a la era **Meiji**, que abrió el país al mundo. Esta historia ha moldeado prácticas culturales, como la etiqueta estricta y el perfeccionismo artístico.</p>
+            <p>En la gastronomía, la influencia del Budismo en el pasado llevó a periodos de restricción de carne, lo que impulsó el desarrollo de la cocina a base de vegetales y pescado.</p>
         </section>
 
-        <section id="tempura">
-            <h2>🍤 Tempura: Arte Frito Ligero</h2>
-            <p>La **Tempura** es una técnica de fritura japonesa donde los mariscos y vegetales se rebozan ligeramente y se fríen. La clave de su éxito es una masa ligera que no absorbe demasiado aceite, resultando en una textura crujiente y delicada.</p>
-            <p>Se sirve típicamente con una salsa para mojar llamada **Tentsuyu**.</p>
+        <section id="cultura">
+            <h2>🌸 Cultura y Tradiciones</h2>
+            <p>La cultura japonesa valora la **armonía (Wa)** y el **respeto (Reigi)**. Conceptos estéticos como el **Wabi-sabi** (encontrar la belleza en la imperfección) permean el arte y la vida diaria.</p>
+            <p>Tradiciones importantes incluyen la **Ceremonia del Té (Chadō)**, el arreglo floral (**Ikebana**) y los festivales de temporada (**Matsuri**).</p>
         </section>
+        
+        <section id="gastronomia">
+            <h2 id="gastronomia">✨ Introducción a la Gastronomía Japonesa</h2>
+            <p>La cocina japonesa, o **Washoku**, es famosa por su énfasis en los ingredientes frescos...</p>
+        </section>
+
+        <section id="sushi">...</section>
+        <section id="ramen">...</section>
+        <section id="tempura">...</section>
     </main>
 
     <footer>
