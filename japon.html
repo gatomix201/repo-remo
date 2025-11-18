@@ -4,218 +4,361 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japón: Sabores del Sol Naciente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* Variables CSS para una fácil personalización */
         :root {
-            --color-principal: #bb3030; /* Rojo/Granate */
-            --color-secundario: #404040; /* Texto más oscuro */
-            --color-fondo: #f9f7f4;
-            --color-acento: #e0e0e0;
-            --color-borde-plato: #d3d3d3;
+            --color-primario: #B83B5E; /* Rojo Sakura */
+            --color-secundario: #3B4A6B; /* Azul Oscuro */
+            --color-fondo-claro: #F8F4E3; /* Beige Claro, casi blanco */
+            --color-acento-suave: #EDE2C6; /* Tono más suave para bordes y fondos */
+            --color-texto-principal: #333333;
+            --color-texto-claro: #F8F4E3; /* Para texto sobre fondo oscuro */
+            --sombra-sutil: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --transicion-rapida: 0.2s ease-out;
+            --transicion-lenta: 0.4s ease-in-out;
         }
 
+        /* Estilos Generales y Resets */
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-secundario);
-            max-width: 900px;
-            margin: 0 auto;
+            background-color: var(--color-fondo-claro);
+            color: var(--color-texto-principal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden; /* Evita scroll horizontal si hay animaciones fuera de pantalla */
         }
 
-        h1, h2 {
-            color: var(--color-principal);
-            text-align: center;
+        /* Fondo Animado de Tinta Japonesa (simulado con gradiente) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(200, 180, 150, 0.1) 0%, rgba(200, 180, 150, 0) 70%),
+                radial-gradient(circle at 80% 90%, rgba(180, 200, 150, 0.1) 0%, rgba(180, 200, 150, 0) 70%),
+                linear-gradient(135deg, var(--color-fondo-claro) 0%, var(--color-acento-suave) 100%);
+            background-size: 200% 200%;
+            animation: backgroundPan 30s linear infinite alternate;
+            z-index: -1; /* Asegura que esté detrás del contenido */
+            opacity: 0.7;
         }
+
+        @keyframes backgroundPan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Noto Serif JP', serif;
+            color: var(--color-primario);
+            text-align: center;
+            margin-bottom: 1em;
+            letter-spacing: 0.05em;
+        }
+
+        h1 { font-size: 2.8em; margin-top: 0.8em; }
+        h2 { font-size: 2.2em; border-bottom: 2px solid var(--color-acento-suave); padding-bottom: 0.3em; display: inline-block; }
 
         a {
-            color: var(--color-principal);
+            color: var(--color-primario);
             text-decoration: none;
-            transition: color 0.3s;
+            position: relative;
+            transition: color var(--transicion-rapida);
         }
 
         a:hover {
-            color: #880000; /* Rojo más oscuro al pasar el mouse */
+            color: var(--color-secundario);
         }
 
-        /* El resto de estilos se añadirán en los siguientes commits */
-        /* ------------------------------------- */
-        /* Commit 3: Estilizar Header y Navegación */
-        /* ------------------------------------- */
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-secundario);
+            transition: width var(--transicion-rapida);
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* Header y Navegación */
         header {
-            background-color: var(--color-principal);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: var(--color-primario);
+            color: var(--color-texto-claro);
+            padding: 30px 0;
+            box-shadow: var(--sombra-sutil);
+            animation: fadeInDown 1s ease-out;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         header h1 {
-            color: white;
+            color: var(--color-texto-claro);
             margin-top: 0;
-            font-size: 2em; /* Ajuste para mejor lectura */
+            font-size: 3.5em; /* Un poco más grande para impactar */
+            letter-spacing: 0.1em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: textReveal 1.5s ease-out forwards;
+        }
+        
+        @keyframes textReveal {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         nav ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 20px 0 0;
             display: flex;
-            flex-wrap: wrap; /* Permite que el menú se ajuste en móviles */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 25px; /* Más espacio entre elementos */
         }
 
         nav a {
-            color: white;
+            color: var(--color-texto-claro);
             text-transform: uppercase;
-            padding: 5px 10px;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom 0.3s;
+            padding: 8px 15px;
+            border-bottom: none;
+            transition: background-color var(--transicion-rapida), transform var(--transicion-rapida);
+            border-radius: 5px;
+            font-weight: bold;
+            letter-spacing: 0.08em;
         }
 
         nav a:hover {
-            border-bottom: 2px solid var(--color-acento);
+            color: var(--color-primario); /* Cambia el color del texto */
+            background-color: var(--color-texto-claro); /* Fondo claro al pasar el mouse */
+            transform: translateY(-3px); /* Efecto sutil de elevación */
+        }
+        
+        nav a::after { /* Desactivamos el subrayado en la nav, ya que usamos background-color */
+            display: none;
         }
 
+        /* Contenido Principal */
         main {
+            flex-grow: 1;
+            max-width: 900px;
+            margin: 30px auto;
             padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+            border-radius: 12px;
+            box-shadow: var(--sombra-sutil);
+            animation: fadeIn 1.5s ease-out forwards;
+            position: relative; /* Para el adorno */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Adorno tipo Sello Japonés en la esquina */
+        main::before {
+            content: '侘寂'; /* Wabi-sabi, un concepto estético japonés */
+            font-family: 'Noto Serif JP', serif;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2.5em;
+            color: rgba(var(--color-primario), 0.1); /* Muy tenue */
+            transform: rotate(10deg);
+            pointer-events: none;
+            user-select: none;
         }
 
         section {
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid var(--color-acento);
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+            padding: 30px;
+            margin-bottom: 35px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform var(--transicion-lenta), box-shadow var(--transicion-lenta);
+            border: 1px solid var(--color-acento-suave);
         }
 
-        footer {
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            background-color: var(--color-acento);
-            color: var(--color-secundario);
-        }
-        /* ------------------------------------- */
-        /* Commit 4: Diseño de Secciones de Platos y Listas */
-        /* ------------------------------------- */
-
-        /* Estilo específico para las secciones de platos (Sushi, Ramen, Tempura) */
-        #sushi, #ramen, #tempura {
-            border-left: 5px solid var(--color-principal); /* Borde de color para destacar */
-            transition: transform 0.3s ease;
+        section:hover {
+            transform: translateY(-8px); /* Elevación más pronunciada */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
-        #sushi:hover, #ramen:hover, #tempura:hover {
-            transform: translateY(-5px); /* Pequeño efecto de elevación al pasar el mouse */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        p {
+            margin-bottom: 1em;
+            color: var(--color-texto-principal);
         }
-        
-        /* Estilo para listas */
+
+        /* Estilo de Listas */
         ul {
-            list-style: none; /* Quitamos los puntos por defecto */
+            list-style: none;
             padding-left: 0;
+            margin-top: 1.5em;
         }
 
         ul li {
-            padding: 5px 0 5px 20px;
+            padding: 8px 0 8px 30px;
             position: relative;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            background-color: var(--color-fondo-claro);
+            border-left: 3px solid var(--color-acento-suave);
+            border-radius: 4px;
+            transition: border-color var(--transicion-rapida);
         }
 
-        /* Icono personalizado para listas */
+        ul li:hover {
+            border-left-color: var(--color-primario);
+        }
+
+        /* Icono personalizado para listas (Flor de Cerezo o Onigiri) */
         ul li::before {
-            content: '•'; /* O puedes usar un emoji como '🍙' */
-            color: var(--color-principal);
-            font-weight: bold;
-            display: inline-block; 
-            width: 1em;
-            margin-left: -1em;
+            content: '🌸'; /* O '🍙', '🥢' */
+            font-size: 1.1em;
+            color: var(--color-primario);
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
+        /* Footer */
         footer {
             text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            background-color: var(--color-acento);
-            color: var(--color-secundario);
-            border-radius: 0 0 8px 8px; /* Redondear solo si el main no tiene overflow */
+            padding: 25px;
+            margin-top: 40px;
+            background-color: var(--color-secundario);
+            color: var(--color-texto-claro);
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        footer p {
+            color: var(--color-texto-claro);
+            margin: 0;
+            letter-spacing: 0.05em;
+        }
+
+        /* Animaciones generales */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            nav ul { flex-direction: column; gap: 10px; }
+            nav a { padding: 10px; width: 80%; text-align: center; margin: 0 auto; }
+            main { margin: 20px auto; padding: 15px; }
+            section { padding: 20px; margin-bottom: 25px; }
+            main::before { font-size: 2em; top: 10px; right: 10px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            main { margin: 15px; padding: 10px; }
+            section { padding: 15px; margin-bottom: 20px; }
+            ul li { padding: 6px 0 6px 25px; }
+            ul li::before { font-size: 1em; left: 5px; }
+            header { padding: 20px 0;}
+            nav { margin-top: 15px;}
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Japón: Una Aventura Culinaria y Cultural</h1>
+        <h1><span class="jp-char">日</span> <span class="jp-char">本</span>: Una Aventura Culinaria y Cultural <span class="jp-char">🇯🇵</span></h1>
         <nav>
             <ul>
-                <li><a href="#geografia">Geografía</a></li>
-                <li><a href="#historia">Historia</a></li>
-                <li><a href="#cultura">Cultura</a></li>
-                <li><a href="#gastronomia">Gastronomía</a></li>
+                <li><a href="#geografia">Geografía 🗺️</a></li>
+                <li><a href="#historia">Historia 📜</a></li>
+                <li><a href="#cultura">Cultura 🌸</a></li>
+                <li><a href="#gastronomia">Gastronomía 🍜</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="introduccion">
-            <h2>🇯🇵 Introducción a Japón</h2>
-            <p>Japón, o **Nihon/Nippon**, es una nación insular reconocida globalmente por su singular mezcla de tradición milenaria y tecnología futurista. El país es un archipiélago que se extiende por el Océano Pacífico, ofreciendo paisajes que van desde montañas nevadas hasta playas tropicales.</p>
+            <h2>🌸 Introducción a Japón</h2>
+            <p>Japón, o **Nihon/Nippon**, es una nación insular reconocida globalmente por su singular mezcla de tradición milenaria y tecnología futurista. El país es un archipiélago que se extiende por el Océano Pacífico, ofreciendo paisajes que van desde montañas nevadas hasta playas tropicales. Un lugar donde la serenidad del **zen** se encuentra con la vibrante energía de sus ciudades.</p>
         </section>
 
         <section id="geografia">
-            <h2>🗺️ Geografía y Entorno Natural</h2>
-            <p>Japón está formado por un arco de más de 6,800 islas. Las cuatro islas principales son **Honshu** (la más grande), **Hokkaido**, **Kyushu** y **Shikoku**. Es un país altamente montañoso y volcánico, siendo el **Monte Fuji** su pico más alto.</p>
-            <p>Su ubicación influye directamente en su gastronomía, con una vasta costa que proporciona mariscos frescos y variados climas que permiten diversos cultivos.</p>
+            <h2>🏞️ Geografía y Entorno Natural</h2>
+            <p>Japón está formado por un arco de más de 6,800 islas. Las cuatro islas principales son **Honshu** (la más grande), **Hokkaido**, **Kyushu** y **Shikoku**. Es un país altamente montañoso y volcánico, siendo el majestuoso **Monte Fuji** su pico más alto, un símbolo de belleza y espiritualidad.</p>
+            <p>Su ubicación insular influye directamente en su gastronomía, con una vasta costa que proporciona mariscos frescos y variados climas que permiten diversos cultivos, creando una despensa natural inigualable.</p>
             <ul>
-                <li>Capital: Tokio</li>
+                <li>Capital: Tokio (東京)</li>
                 <li>Población: Aproximadamente 126 millones.</li>
             </ul>
         </section>
 
         <section id="historia">
             <h2>📜 Breve Contexto Histórico</h2>
-            <p>La historia japonesa está marcada por periodos de aislamiento (**Sakoku**) y rápida modernización. La época feudal de los **Shogunatos** y los samuráis dio paso a la era **Meiji**, que abrió el país al mundo. Esta historia ha moldeado prácticas culturales, como la etiqueta estricta y el perfeccionismo artístico.</p>
-            <p>En la gastronomía, la influencia del Budismo en el pasado llevó a periodos de restricción de carne, lo que impulsó el desarrollo de la cocina a base de vegetales y pescado.</p>
+            <p>La historia japonesa está marcada por periodos de aislamiento (**Sakoku**) y rápida modernización. La fascinante época feudal de los **Shogunatos** y los honorables samuráis dio paso a la era **Meiji**, que abrió el país al mundo y sentó las bases de la nación moderna. Esta rica historia ha moldeado prácticas culturales, como la etiqueta estricta, el respeto por la jerarquía y el perfeccionismo artístico en todas sus formas.</p>
+            <p>En la gastronomía, la influencia del Budismo en el pasado llevó a periodos de restricción de carne, lo que impulsó el desarrollo de la cocina a base de vegetales y pescado, dando origen a platos delicados y llenos de sabor.</p>
         </section>
 
         <section id="cultura">
-            <h2>🌸 Cultura y Tradiciones</h2>
-            <p>La cultura japonesa valora la **armonía (Wa)** y el **respeto (Reigi)**. Conceptos estéticos como el **Wabi-sabi** (encontrar la belleza en la imperfección) permean el arte y la vida diaria.</p>
-            <p>Tradiciones importantes incluyen la **Ceremonia del Té (Chadō)**, el arreglo floral (**Ikebana**) y los festivales de temporada (**Matsuri**).</p>
+            <h2>🎏 Cultura y Tradiciones</h2>
+            <p>La cultura japonesa valora profundamente la **armonía (Wa)** y el **respeto (Reigi)**. Conceptos estéticos profundos como el **Wabi-sabi** (encontrar la belleza en la imperfección y la transitoriedad) y el **Yūgen** (una profunda belleza sutil y misteriosa) permean el arte, la arquitectura y la vida diaria.</p>
+            <p>Tradiciones importantes incluyen la serena **Ceremonia del Té (Chadō)**, el delicado arte del arreglo floral (**Ikebana**) y los vibrantes festivales de temporada (**Matsuri**) que celebran la naturaleza y la comunidad.</p>
         </section>
         
         <section id="gastronomia">
-            <h2>✨ Introducción a la Gastronomía Japonesa</h2>
-            <p>La cocina japonesa, o **Washoku**, es famosa por su énfasis en los ingredientes frescos, la presentación artística y el equilibrio de sabores. Fue reconocida como Patrimonio Cultural Inmaterial de la UNESCO.</p>
-            <p>Se enfoca en cinco principios básicos: cinco colores (blanco, negro, rojo, amarillo y verde), cinco técnicas (asar, cocer a fuego lento, freír, vaporizar y crudo) y cinco sabores (dulce, salado, agrio, amargo y umami).</p>
+            <h2>🍣 Introducción a la Gastronomía Japonesa</h2>
+            <p>La cocina japonesa, o **Washoku**, es famosa por su énfasis en los ingredientes frescos de temporada, la presentación artística que deleita la vista y el equilibrio sutil de sabores. Fue reconocida como Patrimonio Cultural Inmaterial de la UNESCO, un testimonio de su sofisticación y valor cultural.</p>
+            <p>Se enfoca en cinco principios básicos: cinco colores (blanco, negro, rojo, amarillo y verde), cinco técnicas (asar, cocer a fuego lento, freír, vaporizar y crudo) y cinco sabores (dulce, salado, agrio, amargo y el profundo umami).</p>
         </section>
 
         <section id="sushi">
-            <h2>🍣 Sushi y Sashimi</h2>
-            <p>El **Sushi** es quizás el plato más icónico. Consiste en arroz avinagrado (shari) combinado con diversos ingredientes, principalmente pescado y mariscos crudos o cocinados. El **Sashimi** se refiere únicamente a cortes finos de pescado o mariscos sin arroz.</p>
+            <h2>🍙 Sushi y Sashimi: La Delicadeza del Mar</h2>
+            <p>El **Sushi** es quizás el plato más icónico a nivel mundial. Consiste en arroz avinagrado (shari) magistralmente combinado con diversos ingredientes, principalmente pescado y mariscos crudos de la más alta calidad o cocinados. El **Sashimi**, por otro lado, se refiere únicamente a cortes finos y artísticos de pescado o mariscos frescos, presentados sin arroz, realzando su sabor puro.</p>
             <ul>
                 <li>Variedades Populares: Nigiri, Maki, Uramaki.</li>
-                <li>Acompañamientos Comunes: Salsa de soya, wasabi y jengibre encurtido (gari).</li>
+                <li>Acompañamientos Comunes: Salsa de soya de calidad, el toque picante del wasabi y el refrescante jengibre encurtido (gari).</li>
             </ul>
         </section>
 
         <section id="ramen">
-            <h2>🍜 Ramen: El Confort en un Tazón</h2>
-            <p>El **Ramen** es un plato de fideos de trigo servidos en un caldo sabroso, a menudo con carne (cerdo o pollo) y una variedad de ingredientes. Aunque es de origen chino, Japón lo ha adaptado y perfeccionado con innumerables estilos regionales.</p>
-            <p>Los tipos de caldo más famosos son **Shio** (sal), **Shoyu** (salsa de soya), **Miso** y **Tonkotsu** (hueso de cerdo).</p>
+            <h2>🍜 Ramen: El Confort en un Tazón Caliente</h2>
+            <p>El **Ramen** es un plato de fideos de trigo servidos en un caldo sabroso y reconfortante, a menudo con carne (cerdo o pollo) y una variedad de ingredientes frescos como huevo, alga nori, cebolleta y narutomaki. Aunque de origen chino, Japón lo ha adaptado y perfeccionado con innumerables estilos regionales, cada uno con su propia personalidad.</p>
+            <p>Los tipos de caldo más famosos son **Shio** (base de sal), **Shoyu** (base de salsa de soya), **Miso** (base de pasta de soja fermentada) y el cremoso **Tonkotsu** (caldo de huesos de cerdo cocido por horas).</p>
         </section>
 
         <section id="tempura">
-            <h2>🍤 Tempura: Arte Frito Ligero</h2>
-            <p>La **Tempura** es una técnica de fritura japonesa donde los mariscos y vegetales se rebozan ligeramente y se fríen. La clave de su éxito es una masa ligera que no absorbe demasiado aceite, resultando en una textura crujiente y delicada.</p>
-            <p>Se sirve típicamente con una salsa para mojar llamada **Tentsuyu**.</p>
+            <h2>🍤 Tempura: Arte Frito Ligero y Crujiente</h2>
+            <p>La **Tempura** es una exquisita técnica de fritura japonesa donde mariscos y vegetales frescos se rebozan ligeramente y se fríen con maestría. La clave de su éxito radica en una masa increíblemente ligera y aireada que no absorbe demasiado aceite, resultando en una textura crujiente, delicada y no grasosa. Es un arte que realza el sabor natural de los ingredientes.</p>
+            <p>Se sirve típicamente con una salsa para mojar llamada **Tentsuyu**, a menudo acompañada de rábano rallado (daikon oroshi).</p>
         </section>
     </main>
 
     <footer>
-        <p>Explorando el arte de la cocina japonesa. &copy; Práctica de Versionamiento 2025.</p>
+        <p>探索日本の料理 | Explorando el arte de la cocina japonesa. &copy; 2025.</p>
     </footer>
 </body>
 </html>
