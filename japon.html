@@ -10,7 +10,7 @@
         :root {
             --color-primario: #B83B5E; /* Rojo Sakura */
             --color-secundario: #3B4A6B; /* Azul Oscuro */
-            --color-fondo-claro: #F8F4E3; /* Beige Claro, casi blanco */
+            --color-fondo-claro: #F8F4E3; /* Beige Claro */
             --color-acento-suave: #EDE2C6; /* Tono más suave para bordes y fondos */
             --color-texto-principal: #333333;
             --color-texto-claro: #F8F4E3; /* Para texto sobre fondo oscuro */
@@ -25,37 +25,48 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo-claro);
             color: var(--color-texto-principal);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow-x: hidden; /* Evita scroll horizontal si hay animaciones fuera de pantalla */
+            overflow-x: hidden;
+            
+            /* --- INTEGRACIÓN DE IMAGEN DE FONDO --- */
+            background-image: url('japon.png'); /* Asegúrate de tener esta imagen */
+            background-size: cover;             /* Cubre toda la pantalla */
+            background-position: center;        /* Centrada */
+            background-attachment: fixed;       /* Fija al hacer scroll */
+            background-repeat: no-repeat;
+            background-color: var(--color-fondo-claro); /* Color de respaldo */
         }
 
-        /* Fondo Animado de Tinta Japonesa (simulado con gradiente) */
-        body::before {
+        /* --- CAPA DE TRANSPARENCIA (50%) --- */
+        /* Esto crea un velo semitransparente sobre la imagen para que el texto se lea bien */
+        body::after {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(200, 180, 150, 0.1) 0%, rgba(200, 180, 150, 0) 70%),
-                radial-gradient(circle at 80% 90%, rgba(180, 200, 150, 0.1) 0%, rgba(180, 200, 150, 0) 70%),
-                linear-gradient(135deg, var(--color-fondo-claro) 0%, var(--color-acento-suave) 100%);
-            background-size: 200% 200%;
-            animation: backgroundPan 30s linear infinite alternate;
-            z-index: -1; /* Asegura que esté detrás del contenido */
-            opacity: 0.7;
+            background-color: var(--color-fondo-claro); /* Usa el beige del tema */
+            opacity: 0.50; /* 50% de transparencia */
+            z-index: -1; /* Se coloca detrás del contenido pero sobre el fondo del body */
+            pointer-events: none; /* Permite hacer clic a través de esta capa si fuera necesario */
         }
 
-        @keyframes backgroundPan {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
+        /* He comentado la animación anterior de "tinta" para que se vea tu imagen japon.png */
+        /* body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:     
+                radial-gradient(circle at 10% 20%, rgba(200, 180, 150, 0.1) 0%, rgba(200, 180, 150, 0) 70%),
+                radial-gradient(circle at 80% 90%, rgba(180, 200, 150, 0.1) 0%, rgba(180, 200, 150, 0) 70%);
+            z-index: -2; 
+        } 
+        */
 
         h1, h2, h3 {
             font-family: 'Noto Serif JP', serif;
@@ -110,7 +121,7 @@
         header h1 {
             color: var(--color-texto-claro);
             margin-top: 0;
-            font-size: 3.5em; /* Un poco más grande para impactar */
+            font-size: 3.5em;
             letter-spacing: 0.1em;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
             position: relative;
@@ -129,7 +140,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px; /* Más espacio entre elementos */
+            gap: 25px;
         }
 
         nav a {
@@ -144,14 +155,12 @@
         }
 
         nav a:hover {
-            color: var(--color-primario); /* Cambia el color del texto */
-            background-color: var(--color-texto-claro); /* Fondo claro al pasar el mouse */
-            transform: translateY(-3px); /* Efecto sutil de elevación */
+            color: var(--color-primario);
+            background-color: var(--color-texto-claro);
+            transform: translateY(-3px);
         }
         
-        nav a::after { /* Desactivamos el subrayado en la nav, ya que usamos background-color */
-            display: none;
-        }
+        nav a::after { display: none; }
 
         /* Contenido Principal */
         main {
@@ -159,11 +168,13 @@
             max-width: 900px;
             margin: 30px auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+            /* Hacemos el contenedor principal un poco más opaco para que el texto se lea perfecto */
+            background-color: rgba(255, 255, 255, 0.85); 
             border-radius: 12px;
             box-shadow: var(--sombra-sutil);
             animation: fadeIn 1.5s ease-out forwards;
-            position: relative; /* Para el adorno */
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté por encima del fondo */
         }
 
         @keyframes fadeIn {
@@ -171,15 +182,15 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Adorno tipo Sello Japonés en la esquina */
+        /* Adorno tipo Sello Japonés */
         main::before {
-            content: '侘寂'; /* Wabi-sabi, un concepto estético japonés */
+            content: '侘寂';
             font-family: 'Noto Serif JP', serif;
             position: absolute;
             top: 15px;
             right: 15px;
             font-size: 2.5em;
-            color: rgba(var(--color-primario), 0.1); /* Muy tenue */
+            color: rgba(var(--color-primario), 0.1);
             transform: rotate(10deg);
             pointer-events: none;
             user-select: none;
@@ -188,7 +199,7 @@
         section {
             padding: 30px;
             margin-bottom: 35px;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente en las secciones */
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: transform var(--transicion-lenta), box-shadow var(--transicion-lenta);
@@ -196,7 +207,7 @@
         }
 
         section:hover {
-            transform: translateY(-8px); /* Elevación más pronunciada */
+            transform: translateY(-8px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
@@ -216,7 +227,7 @@
             padding: 8px 0 8px 30px;
             position: relative;
             margin-bottom: 8px;
-            background-color: var(--color-fondo-claro);
+            background-color: rgba(248, 244, 227, 0.5); /* Fondo sutilmente transparente */
             border-left: 3px solid var(--color-acento-suave);
             border-radius: 4px;
             transition: border-color var(--transicion-rapida);
@@ -226,9 +237,8 @@
             border-left-color: var(--color-primario);
         }
 
-        /* Icono personalizado para listas (Flor de Cerezo o Onigiri) */
         ul li::before {
-            content: '🌸'; /* O '🍙', '🥢' */
+            content: '🌸';
             font-size: 1.1em;
             color: var(--color-primario);
             position: absolute;
@@ -246,6 +256,8 @@
             color: var(--color-texto-claro);
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
             animation: fadeInUp 1s ease-out;
+            position: relative;
+            z-index: 1;
         }
         
         footer p {
@@ -254,7 +266,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* Animaciones generales */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
